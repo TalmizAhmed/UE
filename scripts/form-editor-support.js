@@ -311,7 +311,7 @@ export async function applyChanges(event) {
   return true;
 }
 
-export function attachEventListners(main) {
+function attachEventListners(main) {
   [
     'aue:content-patch',
     'aue:content-update',
@@ -346,6 +346,16 @@ export function attachEventListners(main) {
   document.body.addEventListener('aue:ui-edit', ueEditModeHandler);
 }
 
+function enableExtension() {
+  const head = document.getElementsByTagName('head')[0];
+  const meta = document.createElement('meta');
+  meta.name = 'urn:adobe:aue:config:extensions';
+  meta.content = 'https://283250-684greenantelope-stage.adobeio-static.net';
+  head.appendChild(meta);
+}
+
 const observer = new MutationObserver(instrumentForms);
 observer.observe(document, { childList: true, subtree: true, attributeFilter: ['form'] });
 loadCSS(`${window.hlx.codeBasePath}/scripts/form-editor-support.css`);
+attachEventListners(document.querySelector('main'));
+enableExtension();
