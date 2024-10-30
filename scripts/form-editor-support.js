@@ -355,6 +355,6 @@ function enableUEExtension() {
 }
 
 const observer = new MutationObserver(instrumentForms);
-enableUEExtension();
 observer.observe(document, { childList: true, subtree: true, attributeFilter: ['form'] });
 loadCSS(`${window.hlx.codeBasePath}/scripts/form-editor-support.css`);
+enableUEExtension();
